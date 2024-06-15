@@ -1,4 +1,6 @@
 import {Game} from "./game.mjs";
+import {Vector} from "./particles/vector.mjs";
+import {Particles} from "./particles/particles.mjs";
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext('2d');
@@ -27,12 +29,16 @@ game.fillRandom();
 let stepTime = 100;
 let lastStep = Date.now();
 
+const particles = new Particles();
+particles.createParticle(new Vector(400, 400), new Vector(0, 0), 1);
+
 const update = () => {
   const now = Date.now();
   if (now > lastStep + stepTime) {
     game.step();
     lastStep = now;
   }
+  particles.step();
 
   ctx.clearRect(0, 0, worldWidth, worldHeight);
 
@@ -46,16 +52,18 @@ const update = () => {
   game.draw(ctx);
 
   ctx.restore();
+
+  particles.draw(ctx);
+
   updateWorldSettings();
-
-
   requestAnimationFrame(update);
 }
 
 update();
 
-document.body.addEventListener('click', () => {
+document.body.addEventListener('click', (evt) => {
   game.step();
+  particles.createParticle(new Vector(evt.x, evt.y), Vector.fromAngle(Math.random() * Math.PI * 2), 1 + Math.random() * 3);
 });
 let speedInput = document.getElementById('inputSpeed');
 speedInput.addEventListener("change", () => {
@@ -67,3 +75,4 @@ speedInput.addEventListener("change", () => {
   else
     stepTime = 1000 / val;
 })
+
