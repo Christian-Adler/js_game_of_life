@@ -24,7 +24,7 @@ updateWorldSettings();
 const game = new Game();
 game.fillRandom();
 
-const stepTime = 100;
+let stepTime = 100;
 let lastStep = Date.now();
 
 const update = () => {
@@ -57,3 +57,13 @@ update();
 document.body.addEventListener('click', () => {
   game.step();
 });
+let speedInput = document.getElementById('inputSpeed');
+speedInput.addEventListener("change", () => {
+  let val = speedInput.value;
+  document.getElementById('speedValue').innerText = val;
+  val = parseInt(val);
+  if (val <= 0)
+    stepTime = Number.MAX_SAFE_INTEGER;
+  else
+    stepTime = 1000 / val;
+})
