@@ -23,15 +23,44 @@ class Game {
     // }
 
 
-    this.addLivingCell(new Cell(0, 0));
-    this.addLivingCell(new Cell(1, 0));
-    this.addLivingCell(new Cell(2, 0));
+    // Blinker
+    // (period 2)
+    // this.addLivingCell(new Cell(0, 0));
+    // this.addLivingCell(new Cell(1, 0));
+    // this.addLivingCell(new Cell(2, 0));
 
-    this.addLivingCell(new Cell(10, 10));
-    this.addLivingCell(new Cell(12, 10));
-    this.addLivingCell(new Cell(11, 11));
-    this.addLivingCell(new Cell(12, 11));
-    this.addLivingCell(new Cell(11, 12));
+    // Glider
+    // this.addLivingCell(new Cell(10, 10));
+    // this.addLivingCell(new Cell(12, 10));
+    // this.addLivingCell(new Cell(11, 11));
+    // this.addLivingCell(new Cell(12, 11));
+    // this.addLivingCell(new Cell(11, 12));
+
+    // Light-
+    // weight
+    // spaceship
+    // (LWSS)
+    // this.addLivingCell(new Cell(3 - 30, -30));
+    // this.addLivingCell(new Cell(4 - 30, -30));
+    // this.addLivingCell(new Cell(1 - 30, 1 - 30));
+    // this.addLivingCell(new Cell(2 - 30, 1 - 30));
+    // this.addLivingCell(new Cell(4 - 30, 1 - 30));
+    // this.addLivingCell(new Cell(5 - 30, 1 - 30));
+    // this.addLivingCell(new Cell(1 - 30, 2 - 30));
+    // this.addLivingCell(new Cell(2 - 30, 2 - 30));
+    // this.addLivingCell(new Cell(3 - 30, 2 - 30));
+    // this.addLivingCell(new Cell(4 - 30, 2 - 30));
+    // this.addLivingCell(new Cell(2 - 30, 3 - 30));
+    // this.addLivingCell(new Cell(3 - 30, 3 - 30));
+
+    // Acorn
+    this.addLivingCell(new Cell(1, 0));
+    this.addLivingCell(new Cell(3, 1));
+    this.addLivingCell(new Cell(0, 2));
+    this.addLivingCell(new Cell(1, 2));
+    this.addLivingCell(new Cell(4, 2));
+    this.addLivingCell(new Cell(5, 2));
+    this.addLivingCell(new Cell(6, 2));
 
     this.calcMinMax();
   }
