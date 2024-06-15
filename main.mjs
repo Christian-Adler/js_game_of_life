@@ -1,6 +1,7 @@
 import {Game} from "./game.mjs";
 import {Vector} from "./particles/vector.mjs";
 import {Particles} from "./particles/particles.mjs";
+import {lerp} from "./utils.mjs";
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext('2d');
@@ -33,10 +34,27 @@ game.fillRandom();
 let stepTime = 100;
 let lastStep = Date.now();
 
+let prevScale = 100;
+let targetScale = null;
+let percent = 0;
+
 const update = () => {
   const xScale = worldWidth / (4 + Math.max(Math.abs(game.xMax), Math.abs(game.xMin)) * 2);
   const yScale = worldHeight / (4 + Math.max(Math.abs(game.yMax), Math.abs(game.yMin)) * 2);
-  const scale = Math.min(xScale, yScale);
+  let scale = Math.min(xScale, yScale);
+
+  if (targetScale === null) {
+    prevScale = scale;
+    targetScale = scale;
+  } else if (percent >= 1) {
+    percent = 0;
+    prevScale = targetScale;
+    targetScale = scale;
+  } else
+    targetScale = Math.max(targetScale, scale);
+
+  scale = lerp(prevScale, targetScale, percent);
+
 
   const now = Date.now();
   if (now > lastStep + stepTime) {
@@ -62,6 +80,10 @@ const update = () => {
   // ctx.restore();
 
   updateWorldSettings();
+
+  if (percent < 1)
+    percent += 0.03;
+
   requestAnimationFrame(update);
 }
 
