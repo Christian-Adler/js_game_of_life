@@ -1,10 +1,13 @@
+import {Vector} from "./particles/vector.mjs";
+
 class Game {
-  constructor() {
+  constructor(particles) {
     this.livingCells = new Map();
     this.xMin = -1;
     this.xMax = 1;
     this.yMin = -1;
     this.yMax = 1;
+    this.particles = particles;
   }
 
   addLivingCell(cell) {
@@ -117,6 +120,8 @@ class Game {
     this.livingCells.clear();
     for (const nextGenCell of nextGenCells) {
       this.livingCells.set(nextGenCell.getKey(), nextGenCell);
+      if (nextGenCell.age === 1)
+        this.particles.createParticlesAt(new Vector(nextGenCell.x, nextGenCell.y));
     }
 
     this.calcMinMax();
